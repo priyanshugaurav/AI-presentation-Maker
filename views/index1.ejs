@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/libs/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <title>Ai Presentation Maker</title>
+</head>
+
+<body>
+    <nav>
+        <a href="#" class="home-btn">
+            <svg class="home-btn-svg" aria-hidden="true" focusable="false" data-prefix="far" data-icon="house"
+                class="svg-inline--fa fa-house fa-1x " role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512">
+                <path fill="currentColor"
+                    d="M272.5 5.7c9-7.6 22.1-7.6 31.1 0l264 224c10.1 8.6 11.4 23.7 2.8 33.8s-23.7 11.3-33.8 2.8L512 245.5V432c0 44.2-35.8 80-80 80H144c-44.2 0-80-35.8-80-80V245.5L39.5 266.3c-10.1 8.6-25.3 7.3-33.8-2.8s-7.3-25.3 2.8-33.8l264-224zM288 55.5L112 204.8V432c0 17.7 14.3 32 32 32h48V312c0-22.1 17.9-40 40-40H344c22.1 0 40 17.9 40 40V464h48c17.7 0 32-14.3 32-32V204.8L288 55.5zM240 464h96V320H240V464z">
+                </path>
+            </svg>
+        </a>
+        <svg class="right-arrow" aria-hidden="true" focusable="false" data-prefix="far" data-icon="chevron-right"
+            class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 320 512">
+            <path fill="currentColor"
+                d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z">
+            </path>
+        </svg>
+        <h3 class="ppt-title">
+            <%=prompt%>
+        </h3>
+        <div class="theme-btn">
+            <svg class="theme-btn-svg" aria-hidden="true" focusable="false" data-prefix="far" data-icon="palette"
+                class="svg-inline--fa fa-palette " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="currentColor"
+                    d="M464 258.2c0 2.7-1 5.2-4.2 8c-3.8 3.1-10.1 5.8-17.8 5.8H344c-53 0-96 43-96 96c0 6.8 .7 13.4 2.1 19.8c3.3 15.7 10.2 31.1 14.4 40.6l0 0c.7 1.6 1.4 3 1.9 4.3c5 11.5 5.6 15.4 5.6 17.1c0 5.3-1.9 9.5-3.8 11.8c-.9 1.1-1.6 1.6-2 1.8c-.3 .2-.8 .3-1.6 .4c-2.9 .1-5.7 .2-8.6 .2C141.1 464 48 370.9 48 256S141.1 48 256 48s208 93.1 208 208c0 .7 0 1.4 0 2.2zm48 .5c0-.9 0-1.8 0-2.7C512 114.6 397.4 0 256 0S0 114.6 0 256S114.6 512 256 512c3.5 0 7.1-.1 10.6-.2c31.8-1.3 53.4-30.1 53.4-62c0-14.5-6.1-28.3-12.1-42c-4.3-9.8-8.7-19.7-10.8-29.9c-.7-3.2-1-6.5-1-9.9c0-26.5 21.5-48 48-48h97.9c36.5 0 69.7-24.8 70.1-61.3zM160 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-64a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm128-64a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm64 64a32 32 0 1 0 0-64 32 32 0 1 0 0 64z">
+                </path>
+            </svg>
+            <label for="">Theme</label>
+        </div>
+        <div class="share-btn">
+            <svg class="share-btn-svg" aria-hidden="true" focusable="false" data-prefix="far" data-icon="link"
+                class="svg-inline--fa fa-link " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <path fill="currentColor"
+                    d="M580.3 267.2c56.2-56.2 56.2-147.3 0-203.5C526.8 10.2 440.9 7.3 383.9 57.2l-6.1 5.4c-10 8.7-11 23.9-2.3 33.9s23.9 11 33.9 2.3l6.1-5.4c38-33.2 95.2-31.3 130.9 4.4c37.4 37.4 37.4 98.1 0 135.6L433.1 346.6c-37.4 37.4-98.2 37.4-135.6 0c-35.7-35.7-37.6-92.9-4.4-130.9l4.7-5.4c8.7-10 7.7-25.1-2.3-33.9s-25.1-7.7-33.9 2.3l-4.7 5.4c-49.8 57-46.9 142.9 6.6 196.4c56.2 56.2 147.3 56.2 203.5 0L580.3 267.2zM59.7 244.8C3.5 301 3.5 392.1 59.7 448.2c53.6 53.6 139.5 56.4 196.5 6.5l6.1-5.4c10-8.7 11-23.9 2.3-33.9s-23.9-11-33.9-2.3l-6.1 5.4c-38 33.2-95.2 31.3-130.9-4.4c-37.4-37.4-37.4-98.1 0-135.6L207 165.4c37.4-37.4 98.1-37.4 135.6 0c35.7 35.7 37.6 92.9 4.4 130.9l-5.4 6.1c-8.7 10-7.7 25.1 2.3 33.9s25.1 7.7 33.9-2.3l5.4-6.1c49.9-57 47-142.9-6.5-196.5c-56.2-56.2-147.3-56.2-203.5 0L59.7 244.8z">
+                </path>
+            </svg>
+            <label for="">Share</label>
+        </div>
+        <div onclick="toggleFullScreen()" class="present-btn"><svg class="present-btn-svg" aria-hidden="true" focusable="false" data-prefix="fas"
+                data-icon="play" class="svg-inline--fa fa-play " role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 384 512">
+                <path fill="currentColor"
+                    d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z">
+                </path>
+            </svg>Present</div>
+        <svg class="ai-btn-nav" aria-hidden="true" focusable="false" data-prefix="far" data-icon="sparkles"
+            class="svg-inline--fa fa-sparkles " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M327.5 85.2c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L384 128l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L448 128l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L448 64 426.8 7.5C425.1 3 420.8 0 416 0s-9.1 3-10.8 7.5L384 64 327.5 85.2zM9.3 240C3.6 242.6 0 248.3 0 254.6s3.6 11.9 9.3 14.5L26.3 277l8.1 3.7 .6 .3 88.3 40.8L164.1 410l.3 .6 3.7 8.1 7.9 17.1c2.6 5.7 8.3 9.3 14.5 9.3s11.9-3.6 14.5-9.3l7.9-17.1 3.7-8.1 .3-.6 40.8-88.3L346 281l.6-.3 8.1-3.7 17.1-7.9c5.7-2.6 9.3-8.3 9.3-14.5s-3.6-11.9-9.3-14.5l-17.1-7.9-8.1-3.7-.6-.3-88.3-40.8L217 99.1l-.3-.6L213 90.3l-7.9-17.1c-2.6-5.7-8.3-9.3-14.5-9.3s-11.9 3.6-14.5 9.3l-7.9 17.1-3.7 8.1-.3 .6-40.8 88.3L35.1 228.1l-.6 .3-8.1 3.7L9.3 240zm83 14.5l51.2-23.6c10.4-4.8 18.7-13.1 23.5-23.5l23.6-51.2 23.6 51.2c4.8 10.4 13.1 18.7 23.5 23.5l51.2 23.6-51.2 23.6c-10.4 4.8-18.7 13.1-23.5 23.5l-23.6 51.2-23.6-51.2c-4.8-10.4-13.1-18.7-23.5-23.5L92.3 254.6zM384 384l-56.5 21.2c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L384 448l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L448 448l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L448 384l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L384 384z">
+            </path>
+        </svg>
+        <i class='bx bx-cloud-download menu-btn' onclick="saveAsPPTX()"></i>
+        <img src="https://lh3.googleusercontent.com/a/ACg8ocLMz4v4zjWJllzqaiv7KKlA1XGp0JfNXu1CAowKyzOD2K8=s96-c" alt="">
+    </nav>
+
+    <section class="main-area">
+        <div class="left-pane-section">
+            <div class="left-pane-section-nav">
+                <a href=""><img src="hamburger.png" alt="" /></a>
+                <a href="" class="share-1"><img src="share-icon.png" alt="" /></a>
+                <div href=""><img src="close.png" alt="" /></div>
+            </div>
+            <div class="pane">
+                <button onclick="showCanvas(0)"> Slide 1</button>
+                <button onclick="showCanvas(1)"> Slide 2</button>
+                <button onclick="showCanvas(2)"> Slide 3</button>
+                <button onclick="showCanvas(3)"> Slide 4</button>
+                <button onclick="showCanvas(4)"> Slide 5</button>
+                <button onclick="showCanvas(5)"> Slide 6</button>
+                <button onclick="showCanvas(6)"> Slide 7</button>
+                <button onclick="showCanvas(7)"> Slide 8</button>
+            </div>
+        </div>
+
+        <div class="mid-canvas-section">
+            <div class="tools-menu">
+                <div class="tool-div-btn" onclick="setActive(this)"><svg class="selection-tool tools" aria-hidden="true"
+                        focusable="false" role="img" viewBox="0 0 24 24" class="" fill="none" stroke-width="2"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <g stroke-width="1.25">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M8 13v-7.5a1.5 1.5 0 0 1 3 0v6.5"></path>
+                            <path d="M11 5.5v-2a1.5 1.5 0 1 1 3 0v8.5"></path>
+                            <path d="M14 5.5a1.5 1.5 0 0 1 3 0v6.5"></path>
+                            <path
+                                d="M17 7.5a1.5 1.5 0 0 1 3 0v8.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47">
+                            </path>
+                        </g>
+                    </svg><label for="">1</label></div>
+                <div class="tool-div-btn"><svg  class="selection-tool tools" style="color: #ded8d8;" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 22 22" class="" fill="none" stroke-width="1.25">
+                        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                                d="M6 6l4.153 11.793a0.365 .365 0 0 0 .331 .207a0.366 .366 0 0 0 .332 -.207l2.184 -4.793l4.787 -1.994a0.355 .355 0 0 0 .213 -.323a0.355 .355 0 0 0 -.213 -.323l-11.787 -4.36z">
+                            </path>
+                            <path d="M13.5 13.5l4.5 4.5"></path>
+                        </g>
+                    </svg><label for="">2</label></div>
+                <div class="tool-div-btn" onclick="enableDrawing('rect')"><svg class="selection-tool tools" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 24 24" class="" fill="none" stroke-width="2" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <g stroke-width="1.5">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        </g>
+                    </svg><label for="">3</label></div>
+                <div class="tool-div-btn" onclick="enableDrawing('triangle')"><svg class="selection-tool tools" fill="#000000" width="800px" height="800px"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.87,19.29l-9-15.58a1,1,0,0,0-1.74,0l-9,15.58a1,1,0,0,0,0,1,1,1,0,0,0,.87.5H21a1,1,0,0,0,.87-.5A1,1,0,0,0,21.87,19.29Zm-17.14-.5L12,6.21l7.27,12.58Z" />
+                    </svg><label for="">4</label></div>
+                <div class="tool-div-btn" onclick="enableDrawing('circle')"><svg class="selection-tool tools" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 24 24" class="" fill="none" stroke-width="2" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <g stroke-width="1.5">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                        </g>
+                    </svg><label for="">5</label></div>
+                <div class="tool-div-btn"><svg class="selection-tool tools" style="color: #ded8d8;" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 24 24" class="" fill="none" stroke-width="2" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <g stroke-width="1.5">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <line x1="15" y1="16" x2="19" y2="12"></line>
+                            <line x1="15" y1="8" x2="19" y2="12"></line>
+                        </g>
+                    </svg><label for="">6</label></div>
+                <div class="tool-div-btn" onclick="enableDrawing('line')"><svg class="selection-tool tools" style="color: #ded8d8;" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 20 20" class="" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4.167 10h11.666" stroke-width="1.5"></path>
+                    </svg><label for="">7</label></div>
+                <div class="tool-div-btn" onclick="enableDrawing('draw')"><svg class="selection-tool tools"  aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 20 20" class="" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <g stroke-width="1.25">
+                            <path clip-rule="evenodd"
+                                d="m7.643 15.69 7.774-7.773a2.357 2.357 0 1 0-3.334-3.334L4.31 12.357a3.333 3.333 0 0 0-.977 2.357v1.953h1.953c.884 0 1.732-.352 2.357-.977Z">
+                            </path>
+                            <path d="m11.25 5.417 3.333 3.333"></path>
+                        </g>
+                    </svg><label for="">8</label></div>
+                <div class="tool-div-btn" onclick="addText()"><svg class="selection-tool tools" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 24 24" class="" fill="none" stroke-width="2" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <g stroke-width="1.5">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="4" y1="20" x2="7" y2="20"></line>
+                            <line x1="14" y1="20" x2="21" y2="20"></line>
+                            <line x1="6.9" y1="15" x2="13.8" y2="15"></line>
+                            <line x1="10.2" y1="6.3" x2="16" y2="20"></line>
+                            <polyline points="5 20 11 4 13 4 20 20"></polyline>
+                        </g>
+                    </svg><label for="">9</label></div>
+                <div class="tool-div-btn" onclick="selectImage()"><svg class="selection-tool tools"  aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 20 20" class="" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <g stroke-width="1.25">
+                            <path d="M12.5 6.667h.01"></path>
+                            <path
+                                d="M4.91 2.625h10.18a2.284 2.284 0 0 1 2.285 2.284v10.182a2.284 2.284 0 0 1-2.284 2.284H4.909a2.284 2.284 0 0 1-2.284-2.284V4.909a2.284 2.284 0 0 1 2.284-2.284Z">
+                            </path>
+                            <path d="m3.333 12.5 3.334-3.333c.773-.745 1.726-.745 2.5 0l4.166 4.166"></path>
+                            <path d="m11.667 11.667.833-.834c.774-.744 1.726-.744 2.5 0l1.667 1.667"></path>
+                        </g>
+                    </svg><label for="">0</label></div>
+                <div class="tool-div-btn"><svg class="selection-tool tools" style="color: #ded8d8;" aria-hidden="true" focusable="false"
+                        role="img" viewBox="0 0 20 20" class="" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <g>
+                            <path
+                                d="M13.542 8.542H6.458a2.5 2.5 0 0 0-2.5 2.5v3.75a2.5 2.5 0 0 0 2.5 2.5h7.084a2.5 2.5 0 0 0 2.5-2.5v-3.75a2.5 2.5 0 0 0-2.5-2.5Z"
+                                stroke="currentColor" stroke-width="1.25"></path>
+                            <path d="M10 13.958a1.042 1.042 0 1 0 0-2.083 1.042 1.042 0 0 0 0 2.083Z"
+                                stroke="currentColor" stroke-width="1.25"></path>
+                            <mask id="UnlockedIcon" maskUnits="userSpaceOnUse" x="6" y="1" width="9" height="9"
+                                style="mask-type: alpha;">
+                                <path stroke="none"
+                                    d="M6.399 9.561V5.175c0-.93.401-1.823 1.116-2.48a3.981 3.981 0 0 1 2.693-1.028c1.01 0 1.98.37 2.694 1.027.715.658 1.116 1.55 1.116 2.481"
+                                    fill="#fff"></path>
+                            </mask>
+                            <g mask="url(#UnlockedIcon)">
+                                <path stroke="none"
+                                    d="M5.149 9.561v1.25h2.5v-1.25h-2.5Zm5.06-7.894V.417v1.25Zm2.559 3.508v1.25h2.5v-1.25h-2.5ZM7.648 8.51V5.175h-2.5V8.51h2.5Zm0-3.334c0-.564.243-1.128.713-1.561L6.668 1.775c-.959.883-1.52 2.104-1.52 3.4h2.5Zm.713-1.561a2.732 2.732 0 0 1 1.847-.697v-2.5c-1.31 0-2.585.478-3.54 1.358L8.36 3.614Zm1.847-.697c.71 0 1.374.26 1.847.697l1.694-1.839a5.231 5.231 0 0 0-3.54-1.358v2.5Zm1.847.697c.47.433.713.997.713 1.561h2.5c0-1.296-.56-2.517-1.52-3.4l-1.693 1.839Z"
+                                    fill="currentColor"></path>
+                            </g>
+                        </g>
+                    </svg><label for="">x</label></div>
+            </div>
+
+            <div id="canvasContainer">
+                <canvas id="canvas0"></canvas>
+                <canvas id="canvas1"></canvas>
+                <canvas id="canvas2"></canvas>
+                <canvas id="canvas3"></canvas>
+                <canvas id="canvas4"></canvas>
+                <canvas id="canvas5"></canvas>
+                <canvas id="canvas6"></canvas>
+                <canvas id="canvas7"></canvas>
+            </div>
+           
+
+        </div>
+
+
+        <script>
+   
+
+        </script>
+
+        <div class="sidebar close">
+          
+            <ul class="nav-links">
+                <li id="colorPickerBtn">
+                    <a href="#">
+                        <i class='bx bx-font-color'></i>
+                        <span class="link_name"></span>
+                    </a>
+                 
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i onclick="leftalign()"  class='bx bx-align-left'></i>
+                            
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-font-size'></i>
+                            <span class="link_name"></span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><input type="text" id="font" onblur="fontsize()"></li>
+                    </ul>
+                </li>
+                <li onclick="changebold()">
+                    <a href="#">
+                        <i class='bx bx-bold'></i>
+                    </a>
+                 
+                </li>
+                <li onclick="changeitallic()">
+                    <a href="#">
+                        <i class='bx bx-italic'></i>
+                       
+                    </a>
+                   
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i onclick="centeralign()" class='bx bx-align-middle'></i>
+                            <span class="link_name"></span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                  
+                </li>
+                <li>
+                    <a href="#">
+                        <i onclick="rightalign()" class='bx bx-align-right'></i>
+                    
+                    </a>
+                   
+                </li>
+                <li>
+                    <a href="#">
+                        <i  onclick="justifyalign()" class='bx bx-align-justify'></i>
+                        
+                    </a>
+                  
+                </li>
+                <!-- <li>
+                    <a href="#">
+                      <i class='bx bx-cog' ></i>
+                      <span class="link_name">Setting</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                      <li><a class="link_name" href="#">Setting</a></li>
+                    </ul>
+                  </li> -->
+                <li>
+                    <!-- <div class="profile-details">
+                  <div class="profile-content">
+                    <img src="image/profile.jpg" alt="profileImg">
+                  </div>
+                  <div class="name-job">
+                    <div class="profile_name">Prem Shahi</div>
+                    <div class="job">Web Desginer</div>
+                  </div>
+                  <i class='bx bx-log-out' ></i>
+                </div> -->
+                </li>
+            </ul>
+        </div>
+        <!-- <section class="home-section">
+                <div class="home-content">
+                  <i class='bx bx-menu' ></i>
+                  <span class="text">Drop Down Sidebar</span>
+                </div>
+              </section> -->
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+               
+                function addCanvas() {
+                    var canvas = document.createElement('canvas');
+                    console.log("dsv")
+                    canvas.id = 'canvas' + document.getElementsByClassName('canvas').length;
+                    document.getElementById('canvasContainer').appendChild(canvas);
+                }
+
+               
+            });
+
+
+            let arrow = document.querySelectorAll(".arrow");
+            for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e) => {
+                    let arrowParent = e.target.parentElement.parentElement;
+                    arrowParent.classList.toggle("showMenu");
+                });
+            }
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".bx-menu");
+        </script>
+
+        <h4>
+            All Your data is stored , Locally !!
+        </h4>
+        </div>
+
+        <div id="colorPickerPanel" style="display: none; position: absolute; right: 54px; top: 203px;">
+            <input type="color" id="colorPicker">
+        </div>
+        <script>
+            const colorPickerBtn = document.getElementById('colorPickerBtn');
+const colorPickerPanel = document.getElementById('colorPickerPanel');
+const colorPicker = document.getElementById('colorPicker');
+
+
+colorPickerBtn.addEventListener('click', () => {
+
+    if (colorPickerPanel.style.display === 'none') {
+        colorPickerPanel.style.display = 'block';
+    } else {
+        colorPickerPanel.style.display = 'none';
+    }
+   
+});
+
+var globalcolorindex
+colorPicker.addEventListener('change', (event) => {
+    const selectedColor = event.target.value;
+    applyStyle1("font-color",selectedColor)
+    colorPickerPanel.style.display = 'none';
+});
+
+
+function fontsize(){
+    applyStyle1("font-size",document.getElementById("font").value)
+}
+        </script>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const toolButtons = document.querySelectorAll('.tool-div-btn');
+
+            toolButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    toolButtons.forEach(function (btn) {
+                        btn.classList.remove('active');
+                    });
+                    button.classList.toggle('active');
+                });
+            });
+        });
+
+        const toolButtons = document.querySelectorAll('.tool-div-btn');
+        const keyMap = {
+            '1': 0,
+            '2': 1,
+            '3': 2,
+            '4': 3,
+            '5': 4,
+            '6': 5,
+            '7': 6,
+            '8': 7,
+            '9': 8,
+            '0': 9,
+            'x': 10
+        };
+
+        document.addEventListener('keydown', function (event) {
+            const key = event.key;
+            const buttonIndex = keyMap[key];
+            console.log(event)
+            if (buttonIndex !== undefined && toolButtons[buttonIndex]) {
+                toolButtons.forEach(function (btn) {
+                    btn.classList.remove('active');
+                });
+                toolButtons[buttonIndex].classList.toggle('active');
+            }
+        });
+       
+
+        
+        canvas0 = new fabric.Canvas('canvas0', {
+            backgroundColor: "#ffffff"
+        });
+        canvas0.setWidth(800);
+        canvas0.setHeight(450);
+
+        canvas1 = new fabric.Canvas('canvas1', {
+            backgroundColor: "#ffffff"
+        });
+        canvas1.setWidth(800);
+        canvas1.setHeight(0);
+
+        canvas2 = new fabric.Canvas('canvas2', {
+            backgroundColor: "#ffffff"
+        });
+        canvas2.setWidth(800);
+        canvas2.setHeight(0);
+
+
+        canvas3 = new fabric.Canvas('canvas3', {
+            backgroundColor: "#ffffff"
+        });
+        canvas3.setWidth(800);
+        canvas3.setHeight(0);
+
+        canvas4 = new fabric.Canvas('canvas4', {
+            backgroundColor: "#ffffff"
+        });
+        canvas4.setWidth(800);
+        canvas4.setHeight(0);
+
+        canvas5 = new fabric.Canvas('canvas5', {
+            backgroundColor: "#ffffff"
+        });
+        canvas5.setWidth(800);
+        canvas5.setHeight(0);
+
+        canvas6 = new fabric.Canvas('canvas6', {
+            backgroundColor: "#ffffff"
+        });
+        canvas6.setWidth(800);
+        canvas6.setHeight(0);
+
+        canvas7 = new fabric.Canvas('canvas7', {
+            backgroundColor: "#ffffff"
+        });
+        canvas7.setWidth(800);
+        canvas7.setHeight(0);
+
+        var globalCanvasIndex = 0
+        function showCanvas(canvasIndex) {
+    // Hiding all canvases
+    globalCanvasIndex = canvasIndex
+
+    const canvases = document.getElementsByTagName("canvas");
+    for (let i = 0; i < canvases.length; i++) {
+        if(canvasIndex==0){
+        canvas1.setHeight(0);
+        canvas2.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+        if(canvasIndex==1){
+        canvas0.setHeight(0);
+        canvas2.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==2){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==3){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas2.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==4){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas3.setHeight(0);
+        canvas2.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==5){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas2.setHeight(0);
+        canvas6.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==6){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas2.setHeight(0);
+        canvas7.setHeight(0);
+    }
+    if(canvasIndex==7){
+        canvas1.setHeight(0);
+        canvas0.setHeight(0);
+        canvas3.setHeight(0);
+        canvas4.setHeight(0);
+        canvas5.setHeight(0);
+        canvas6.setHeight(0);
+        canvas2.setHeight(0);
+    }
+    }
+    
+    
+    const canvasToShow = document.getElementById("canvas" + canvasIndex);
+    if (canvasToShow) {
+        canvasToShow.style.position = "absolute";
+        canvasToShow.style.top = "0";
+        if(canvasIndex==0){
+        canvas0.setHeight(450);
+    }
+    if(canvasIndex==1){
+        canvas1.setHeight(450);
+    }
+    if(canvasIndex==2){
+        canvas2.setHeight(450);
+    }
+    if(canvasIndex==3){
+        canvas3.setHeight(450);
+    }
+    if(canvasIndex==4){
+        canvas4.setHeight(450);
+    }
+    if(canvasIndex==5){
+        canvas5.setHeight(450);
+    }
+    if(canvasIndex==6){
+        canvas6.setHeight(450);
+    }
+    if(canvasIndex==7){
+        canvas7.setHeight(450);
+    }
+    }
+}
+
+var canvasIds = ['canvas0', 'canvas1', 'canvas2', 'canvas3', 'canvas4', 'canvas5', 'canvas6', 'canvas7'];
+
+
+var currentCanvasIndex = 0;
+
+function toggleFullScreen() {
+    canvas0.setHeight(450);
+    canvas1.setHeight(450);
+    canvas2.setHeight(450);
+    canvas3.setHeight(450);
+    canvas4.setHeight(450);
+    canvas5.setHeight(450);
+    canvas6.setHeight(450);
+    canvas7.setHeight(450);
+
+     var canvasId = canvasIds[currentCanvasIndex];
+    var canvas = document.getElementById(canvasId);
+
+    if (!document.fullscreenElement) {
+        canvas.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+function representCanvas() {
+    var canvasId = canvasIds[currentCanvasIndex];
+    
+    console.log("Representing canvas: " + canvasId);
+}
+
+// Function to handle keyboard events
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        document.exitFullscreen();
+        currentCanvasIndex = (currentCanvasIndex + 1) % canvasIds.length;
+        representCanvas();
+    } else if (event.key === 'ArrowLeft') {
+        currentCanvasIndex = (currentCanvasIndex - 1 + canvasIds.length) % canvasIds.length;
+        representCanvas();
+    } else if (event.key === 'Enter' && event.shiftKey) {
+
+        toggleFullScreen();
+    }
+});
+
+
+        function preText(str, x, y, w , can) {
+            const text = new fabric.Textbox(str, {
+                left: x,
+                top: y,
+                width: w,
+                fontSize: 20,
+                fill: 'black',
+                fontFamily: 'Arial',
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                textDecoration: ''
+            });
+            console.log(can)
+            can.add(text);
+            can.setActiveObject(text);
+        }
+        canvasess = [canvas0 , canvas1 , canvas2 , canvas3, canvas4, canvas5, canvas6, canvas7]
+        function addText() {
+            canvasess = [canvas0 , canvas1 , canvas2 , canvas3, canvas4, canvas5, canvas6, canvas7]
+            const text = new fabric.Textbox('Edit me', {
+                left: 100,
+                top: 100,
+                width: 200,
+                fontSize: 20,
+                fill: 'white',
+                fontFamily: 'Arial',
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+                textDecoration: '',
+                borderColor: '#ffffff',
+                cornerColor: '#999999',
+                cornerSize: 6,
+                transparentCorners: true,
+            });
+            canvasess[globalCanvasIndex].add(text);
+            canvasess[globalCanvasIndex].setActiveObject(text);
+        }
+
+        function applyStyle(style, value , can) {
+          
+            const activeObject = can.getActiveObject();
+            if (activeObject) {
+                switch (style) {
+                    case 'bold':
+                        activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? 'normal' : 'bold');
+                        break;
+                    case 'italic':
+                        activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? 'normal' : 'italic');
+                        break;
+                    case 'align-left':
+                        activeObject.set('textAlign', 'left');
+                        break;
+                    case 'align-center':
+                        activeObject.set('textAlign', 'center');
+                        break;
+                    case 'align-right':
+                        activeObject.set('textAlign', 'right');
+                        break;
+                    case 'align-justify':
+                        activeObject.set('textAlign', 'justify');
+                        break;
+                    case 'font-family':
+                        activeObject.set('fontFamily', value);
+                        break;
+                    case 'font-color':
+                        activeObject.set('fill', value);
+                        break;
+                    case 'font-size':
+                        activeObject.set('fontSize', parseInt(value));
+                        break;
+                }
+                can.requestRenderAll();
+            }
+        }
+
+        function applyStyle1(style, value) {
+            
+                can = canvasess[globalCanvasIndex]
+    
+            const activeObject = can.getActiveObject();
+            if (activeObject) {
+                switch (style) {
+                    case 'bold':
+                        activeObject.set('fontWeight', activeObject.fontWeight === 'bold' ? 'normal' : 'bold');
+                        break;
+                    case 'italic':
+                        activeObject.set('fontStyle', activeObject.fontStyle === 'italic' ? 'normal' : 'italic');
+                        break;
+                    case 'align-left':
+                        activeObject.set('textAlign', 'left');
+                        break;
+                    case 'align-center':
+                        activeObject.set('textAlign', 'center');
+                        break;
+                    case 'align-right':
+                        activeObject.set('textAlign', 'right');
+                        break;
+                    case 'align-justify':
+                        activeObject.set('textAlign', 'justify');
+                        break;
+                    case 'font-family':
+                        activeObject.set('fontFamily', value);
+                        break;
+                    case 'font-color':
+                        activeObject.set('fill', value);
+                        break;
+                    case 'font-size':
+                        activeObject.set('fontSize', parseInt(value));
+                        break;
+                }
+                can.requestRenderAll();
+            }
+        }
+     
+
+        let drawingObject = null;
+    
+        let drawnShapes = [];
+        var jio =1 ;
+        function enableDrawing(shapeType, imageSrc) {
+            canvasess = [canvas0 , canvas1 , canvas2 , canvas3, canvas4, canvas5, canvas6, canvas7]
+            canvasess[globalCanvasIndex].isDrawingMode = true;
+
+            canvasess[globalCanvasIndex].freeDrawingBrush.width = 1;
+            canvasess[globalCanvasIndex].freeDrawingBrush.color = 'white';
+            canvasess[globalCanvasIndex].freeDrawingBrush.strokeUniform = true;
+
+        
+            function handlePathCreated(options) {
+                const path = options.path;
+
+                let drawingObject;
+
+                switch (shapeType) {
+                    case "rect":
+                        drawingObject = new fabric.Rect({
+                            left: path.left,
+                            top: path.top,
+                            width: path.width,
+                            height: path.height,
+                            fill: 'transparent',
+                            stroke: 'white',
+                            strokeWidth: 2
+                        });
+                        console.log("rect");
+                        break;
+                    case "circle":
+                        drawingObject = new fabric.Circle({
+                            left: path.left,
+                            top: path.top,
+                            radius: path.width / 2,
+                            fill: 'transparent',
+                            stroke: 'white',
+                            strokeWidth: 2
+                        });
+                        console.log("circle");
+                        break;
+                    case "triangle":
+                        drawingObject = new fabric.Triangle({
+                            left: path.left,
+                            top: path.top,
+                            width: path.width,
+                            height: path.height,
+                            fill: 'transparent',
+                            stroke: 'white',
+                            strokeWidth: 2
+                        });
+                        console.log("triangle");
+                        break;
+                    case "line":
+                        console.log(path.x1, path.y1, path.x2, path.y2)
+                        drawingObject = new fabric.Line(path.x1, path.y1, path.x2, path.y2, {
+                            fill: 'white',
+                            stroke: 'white',
+                            strokeWidth: 2
+                        });
+                        console.log("line");
+                        break;
+                    case "arrow":
+                        console.log("arrow - not implemented");
+                        break;
+                    
+                    case "draw":
+                        console.log("draw");
+                        canvasess[globalCanvasIndex].freeDrawingBrush.width = 1;
+                        jio =0
+                        enableDrawing("draw")
+                        
+                        break;
+                    case "image":
+                        fabric.Image.fromURL(imageSrc, function (img) {
+                            drawingObject = img.set({
+                                left: path.left,
+                                top: path.top,
+                            });
+                            canvasess[globalCanvasIndex].add(drawingObject);
+                            drawnShapes.push(drawingObject); 
+                            canvasess[globalCanvasIndex].renderAll();
+                        });
+                        break;
+                    default:
+                        break;
+                }
+
+                if (drawingObject) {
+                    canvasess[globalCanvasIndex].add(drawingObject);
+                    drawnShapes.push(drawingObject); 
+                    canvasess[globalCanvasIndex].renderAll();
+                }
+
+                
+                canvasess[globalCanvasIndex].getObjects().forEach(obj => {
+                    if (obj.type === 'path' && jio==1) {
+                        console.log("das")
+                        canvasess[globalCanvasIndex].remove(obj);
+                    }
+                });
+
+                canvasess[globalCanvasIndex].isDrawingMode = false;
+
+                
+                canvasess[globalCanvasIndex].off('path:created', handlePathCreated);
+            }
+
+            
+            canvasess[globalCanvasIndex].on('path:created', handlePathCreated);
+        }
+
+        // Function to clear all drawing lines and shapes
+        function clearCanvas() {
+            canvasess[globalCanvasIndex].getObjects().forEach(obj => {
+                if (obj.type === 'path' && jio==1) {
+                    canvasess[globalCanvasIndex].remove(obj);
+                }
+            });
+
+            drawnShapes.forEach(shape => {
+                canvasess[globalCanvasIndex].remove(shape);
+            });
+
+            drawnShapes = []; 
+        }
+
+
+
+        function selectImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const image = new Image();
+                        image.onload = function () {
+                            const resizedImage = resizeImage(image, 300); 
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            canvas.width = resizedImage.width;
+                            canvas.height = resizedImage.height;
+                            ctx.drawImage(resizedImage, 0, 0, resizedImage.width, resizedImage.height);
+                            const imageDataUrl = canvas.toDataURL('image/jpeg'); 
+                            enableDrawing('image', imageDataUrl);
+                        };
+                        image.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        function selectImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const image = new Image();
+                        image.onload = function () {
+                            const resizedImage = resizeImage(image, 300);
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            canvas.width = resizedImage.width;
+                            canvas.height = resizedImage.height;
+                            ctx.drawImage(resizedImage, 0, 0, resizedImage.width, resizedImage.height);
+                            const imageDataUrl = canvas.toDataURL('image/jpeg'); 
+                            enableDrawing('image', imageDataUrl);
+                        };
+                        image.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        
+
+        function resizeImage(image, maxWidth) {
+            const aspectRatio = image.width / image.height;
+            const maxHeight = maxWidth / aspectRatio;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = maxWidth;
+            canvas.height = maxHeight;
+
+            
+
+            ctx.imageSmoothingEnabled = false;
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.webkitImageSmoothingEnabled = false;
+            ctx.msImageSmoothingEnabled = false;
+            ctx.drawImage(image, 0, 0, maxWidth, maxHeight);
+            return canvas;
+        }
+
+
+
+
+
+        document.addEventListener('keydown', function(event) {
+    console.log(event.keyCode);
+    var isShiftPressed = event.shiftKey; 
+
+    if (event.keyCode === 57 && isShiftPressed) {
+        console.log('Shift + 9 pressed');
+        addText();
+    } else if (event.keyCode === 51 && isShiftPressed) {
+        console.log('Shift + 3 pressed');
+        enableDrawing('rect');
+        event.preventDefault(); 
+    } else if (event.keyCode === 52 && isShiftPressed) {
+        console.log('Shift + 4 pressed');
+        enableDrawing('triangle');
+        event.preventDefault(); 
+    } else if (event.keyCode === 53 && isShiftPressed) {
+        console.log('Shift + 5 pressed');
+        enableDrawing('circle');
+        event.preventDefault(); 
+    } else if (event.keyCode === 54 && isShiftPressed) {
+        console.log('Shift + 6 pressed');
+        enableDrawing('arrow');
+        event.preventDefault(); 
+    } else if (event.keyCode === 55 && isShiftPressed) {
+        console.log('Shift + 7 pressed');
+        enableDrawing('line');
+        event.preventDefault(); 
+    } else if (event.keyCode === 56 && isShiftPressed) {
+        console.log('Shift + 8 pressed');
+        enableDrawing('draw');
+        event.preventDefault();
+    } else if (event.keyCode === 48 && isShiftPressed) {
+        console.log('Shift + 0 pressed');
+        selectImage();
+        event.preventDefault();
+    } else if (event.keyCode === 66 && isShiftPressed) {
+        console.log('Shift + B pressed');
+        applyStyle1("bold");
+        event.preventDefault();
+    } else if (event.keyCode === 73 && isShiftPressed) {
+        console.log('Shift + I pressed');
+        applyStyle1("italic");
+        event.preventDefault();
+    }
+});
+
+        function leftalign(){
+            applyStyle1("align-left")
+        }
+        function rightalign(){
+            applyStyle1("align-right")
+        }
+        function centeralign(){
+            applyStyle1("align-center")
+        }
+
+
+        function addImage(imageURL, x, y, w, h, z = 1,can) {
+            fabric.Image.fromURL(imageURL, function (img) {
+                img.scaleToWidth(w);
+                img.scaleToHeight(h);
+                img.set({
+                    left: x,
+                    top: y,
+                    // selectable: false
+                    zIndex: 0
+                });
+                can.add(img);
+                if (z == 0) { can.sendToBack(img); }
+            });
+        }
+
+
+    
+function changebold(){
+    applyStyle1("bold")
+}
+
+function changeitallic(){
+    applyStyle1("italic")
+}
+
+
+
+        function template1() {
+            
+            var htmlEncodedText
+            var decodedText
+            var unquotedText
+            var cleanText
+          
+                
+                <%for(i=0;i<8;i++){%>
+                canvas<%=i%>.backgroundColor = "#000000"; 
+                // canvas<%=i%>.renderAll(); 
+                <%slidep = "Slide " + (i+2)%>
+                htmlEncodedText = '<%= JSON.stringify(slides[i+1][slidep].content) %>';
+               
+                decodedText = decodeURIComponent(htmlEncodedText.replace(/&#(\d+);/g, function (match, dec) {
+                    return String.fromCharCode(dec);
+                }));
+
+                
+                unquotedText = decodedText.slice(1, -1);
+                cleanText = unquotedText.replace(/\*/g, '');
+                preText(cleanText, 80, 185, 650,canvas<%=i%>);
+                applyStyle("font-color", "white" , canvas<%=i%>);
+                applyStyle("font-size", "15", canvas<%=i%>);
+                applyStyle("font-family", "Arial", canvas<%=i%>);
+                applyStyle("bold", "",canvas<%=i%>);
+                applyStyle("align-left", "", canvas<%=i%>);
+
+                htmlEncodedTexttitle = '<%= JSON.stringify(slides[i+1][slidep].title) %>';
+              
+                decodedTexttitle = decodeURIComponent(htmlEncodedTexttitle.replace(/&#(\d+);/g, function (match, dec) {
+                    return String.fromCharCode(dec);
+                }));
+
+                
+                unquotedTexttitle = decodedTexttitle.slice(1, -1);
+                cleanTexttitle = unquotedTexttitle.replace(/\*/g, '');
+
+                // Adding images and apply styles as needed
+                addImage("themeimgbg1.png", 53, 50, 0, 92, 0,canvas<%=i%>);
+                addImage("themeimgbg.png", 19, 19, 1000, 415, 0,canvas<%=i%>);
+
+
+                preText(cleanTexttitle, 80, 70, 650 , canvas<%=i%>);
+                applyStyle("font-color", "white",canvas<%=i%>);
+                applyStyle("font-size", "40",canvas<%=i%>);
+                applyStyle("font-family", "Arial",canvas<%=i%>);
+                applyStyle("align-center","",canvas<%=i%>);
+
+                // canvas<%=i%>.renderAll();
+        <%}%>
+
+        }
+
+
+
+
+        template1();
+
+        function saveAsPPTX() {
+                    let pres = new PptxGenJS();
+                    let slide = pres.addSlide();
+
+                    canvas0.forEachObject((fabricObject) => {
+                        if (fabricObject instanceof fabric.Text) {
+                            const { left, top, width, height, fontSize, fontFamily, text } = fabricObject;
+
+                        
+                            fabricObject.setCoords();
+                            const boundingBox = fabricObject.getBoundingRect();
+
+                            
+                            const pptxX = left * 0.015; 
+                            const pptxY = top * 0.015; 
+                            const pptxWidth = boundingBox.width * 0.015; 
+                            const pptxHeight = boundingBox.height * 0.015; 
+
+                            slide.addText(text, {
+                                x: pptxX,
+                                y: pptxY,
+                                w: pptxWidth,
+                                h: pptxHeight,
+                                fontSize: fontSize * 0.75, 
+                                fontFace: fontFamily,
+                                color: "363636",
+                                fill: { color: "ffffff" },
+                                align: pres.AlignH.justify,
+                            });
+                        } else if (fabricObject instanceof fabric.Rect) {
+                            const { left, top, width, height, fill } = fabricObject;
+
+                            // Converting pixel values to PowerPoint units
+                            const pptxX = left * 0.015; 
+                            const pptxY = top * 0.015; 
+                            const pptxWidth = width * 0.015; 
+                            const pptxHeight = height * 0.015; 
+
+                            slide.addShape(pres.shapes.RECTANGLE, {
+                                x: pptxX,
+                                y: pptxY,
+                                w: pptxWidth,
+                                h: pptxHeight,
+                                fill: fill,
+                            });
+                        }
+                    });
+
+                    pres.writeFile({ fileName: "Canvas_Presentation.pptx" });
+                }
+        
+
+            
+
+
+
+    </script>
+</body>
+
+</html>

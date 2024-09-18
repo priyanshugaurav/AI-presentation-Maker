@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Example</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="addCanvas()">Add Canvas</button>
+    <div id="canvasContainer"></div>
+    <script>
+        let canvasCount = 0;
+let activeCanvasId = null;
+
+// Add the initial canvas when the page loads
+window.onload = addCanvas;
+
+function addCanvas() {
+    canvasCount++;
+
+    const canvasContainer = document.getElementById('canvasContainer');
+
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    canvas.id = `canvas${canvasCount}`;
+    canvas.width = 400;
+    canvas.height = 200;
+    canvasContainer.appendChild(canvas);
+
+    // Show the first canvas and make it active
+    if (canvasCount === 1) {
+        canvas.style.display = 'block';
+        activeCanvasId = canvas.id;
+    }
+
+    // Create button to toggle canvas
+    const toggleButton = document.createElement('button');
+    toggleButton.textContent = `Toggle Canvas ${canvasCount}`;
+    toggleButton.onclick = () => toggleCanvas(canvas.id);
+    canvasContainer.appendChild(toggleButton);
+
+    // Create input field for adding text
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.placeholder = 'Enter text';
+    canvasContainer.appendChild(textInput);
+
+    // Create button to add text to canvas
+    const addTextButton = document.createElement('button');
+    addTextButton.textContent = 'Add Text';
+    addTextButton.onclick = () => addTextToCanvas(canvas.id, textInput.value);
+    canvasContainer.appendChild(addTextButton);
+}
+
+function toggleCanvas(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (canvas.style.display === 'none') {
+        canvas.style.display = 'block';
+        activeCanvasId = canvasId;
+    } else {
+        canvas.style.display = 'none';
+        activeCanvasId = null;
+    }
+}
+
+function addTextToCanvas(canvasId, text) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas || !text) return;
+
+    const context = canvas.getContext('2d');
+    context.font = '20px Arial';
+    context.fillText(text, 10, 50);
+}
+
+    </script>
+</body>
+</html>
